@@ -1,0 +1,24 @@
+{
+  "name": "express-postgre-app",
+  "version": "1.0.0",
+  "description": "simple express/postgre app to understand the mvc pattern",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DYLANeay/express-postgre-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DYLANeay/express-postgre-app/issues"
+  },
+  "homepage": "https://github.com/DYLANeay/express-postgre-app#readme",
+  "dependencies": {
+    "express": "^5.1.0",
+    "express-validator": "^7.2.1"
+  }
+}
