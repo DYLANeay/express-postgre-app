@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Users List</title>
+  </head>
+  <body>
+    <h1>Users</h1>
+    <a href="/users/new">Add New User</a>
+    <div id="usersList"></div>
+    <script>
+      fetch('/users')
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then((users) => {
+          const usersList = document.getElementById('usersList');
+          if (users.length === 0) {
+            usersList.innerHTML = '<p>No users found</p>';
+          } else {
+            users.forEach((user) => {
+              usersList.innerHTML += `<p>User ${user.id}: ${user.username}</p>`;
+            });
+          }
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+          document.getElementById('usersList').innerHTML =
+            '<p>Error loading users</p>';
+        });
+    </script>
+  </body>
+</html>
