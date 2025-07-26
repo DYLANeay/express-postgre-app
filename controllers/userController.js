@@ -1,6 +1,10 @@
 const path = require('path');
+const UserModel = require('../models/userModel');
 const db = require('../db/queries');
 const { body, validationResult } = require('express-validator');
+
+// Créer une instance du modèle
+const userModel = new UserModel(db);
 
 const validateUser = [
   body('username')
@@ -12,7 +16,7 @@ const validateUser = [
 
 async function AllUsersGet(req, res) {
   try {
-    const users = await db.getAllUsernames();
+    const users = await userModel.getAllUsers(); // Utiliser le modèle au lieu de db directement
     res.json(users);
   } catch (error) {
     console.error('Error fetching users:', error);
@@ -33,7 +37,7 @@ const createUserPost = [
         return res.status(400).json({ errors: errors.array() });
       }
       const { username } = req.body;
-      await db.insertUsername(username);
+      await userModel.createUser(username); // Utiliser le modèle au lieu de db directement
       res.redirect('/');
     } catch (error) {
       console.error('Error creating user:', error);
@@ -41,8 +45,6 @@ const createUserPost = [
     }
   },
 ];
-
-// Removed getUserById as it's not implemented in the database yet
 
 module.exports = {
   AllUsersGet,

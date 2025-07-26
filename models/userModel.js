@@ -4,15 +4,30 @@ class UserModel {
   }
 
   async getAllUsers() {
-    return await this.db.getAllUsernames();
+    const users = await this.db.getAllUsernames();
+    // Ajouter des informations supplémentaires ou transformer les données
+    return users.map((user) => ({
+      ...user,
+      displayName: user.username.toUpperCase(),
+      createdAt: new Date(),
+    }));
   }
 
   async createUser(username) {
-    return await this.db.insertUsername(username);
+    // Valider ou transformer les données avant l'insertion
+    const sanitizedUsername = username.trim();
+    if (sanitizedUsername.length < 3) {
+      throw new Error('Username too short');
+    }
+    return await this.db.insertUsername(sanitizedUsername);
   }
 
   async getUserById(userId) {
-    return await this.db.getUserById(userId);
+    const user = await this.db.getUserById(userId);
+    if (!user) {
+      throw new Error('User not found');
+    }
+    return user;
   }
 }
 
