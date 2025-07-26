@@ -8,7 +8,7 @@
     <a href="/users/new">Add New User</a>
     <div id="usersList"></div>
     <script>
-      fetch('/users')
+      fetch('/users') // Changed from '/users/api/list' to '/users'
         .then((response) => {
           if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -21,7 +21,7 @@
             usersList.innerHTML = '<p>No users found</p>';
           } else {
             users.forEach((user) => {
-              usersList.innerHTML += `<p>User ${user.id}: ${user.username}</p>`;
+              usersList.innerHTML += `<p>${user.username}</p>`; // Simplified output
             });
           }
         })

@@ -9,11 +9,15 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Serve static files from 'views' directory
-// Root route serves index.html
 app.use(express.static(path.join(__dirname, 'views')));
 
 // Routes
 app.use('/users', userRoutes);
+
+// Root route
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'views/index.html'));
+});
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);

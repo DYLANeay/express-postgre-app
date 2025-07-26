@@ -1,23 +1,18 @@
 class UserModel {
-  constructor() {
-    this.users = []; // Temporary storage until database is implemented
+  constructor(db) {
+    this.db = db;
   }
 
-  getAllUsers() {
-    return this.users;
+  async getAllUsers() {
+    return await this.db.getAllUsernames();
   }
 
-  createUser(username) {
-    const user = {
-      id: this.users.length + 1,
-      username,
-    };
-    this.users.push(user);
-    return user;
+  async createUser(username) {
+    return await this.db.insertUsername(username);
   }
 
-  getUserById(userId) {
-    return this.users.find((user) => user.id === parseInt(userId));
+  async getUserById(userId) {
+    return await this.db.getUserById(userId);
   }
 }
 
