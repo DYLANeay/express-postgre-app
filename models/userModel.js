@@ -13,6 +13,15 @@ class UserModel {
     }));
   }
 
+  async deleteUsers() {
+    try {
+      return await this.db.deleteUsers();
+    } catch (error) {
+      console.error('Error deleting users:', error);
+      throw new Error('Error deleting users');
+    }
+  }
+
   async createUser(username) {
     // Valider ou transformer les données avant l'insertion
     const sanitizedUsername = username.trim();

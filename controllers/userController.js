@@ -28,6 +28,17 @@ function showForm(req, res) {
   res.sendFile(path.join(__dirname, '../views/userForm.html'));
 }
 
+async function deleteUsersGet(req, res) {
+  // Logique pour supprimer un utilisateur
+  try {
+    await userModel.deleteUsers();
+    res.json({ message: 'Users deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting user:', error);
+    res.status(500).json({ error: 'Error deleting user' });
+  }
+}
+
 const createUserPost = [
   validateUser,
   async (req, res) => {
@@ -50,4 +61,5 @@ module.exports = {
   AllUsersGet,
   showForm,
   createUserPost,
+  deleteUsersGet,
 };
